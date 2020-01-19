@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f621e821-007d-4bfd-a490-001a9932c89f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/io/github/idilantha/web/service/CustomerServelet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/io/github/idilantha/web/db/DBConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/io/github/idilantha/web/service/CustomerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/io/github/idilantha/web/service/CustomerServlet.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,8 +26,13 @@
   <component name="ProjectId" id="1WbpBBSIQN0L0yz2xcYExqRbYmi" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../LayeredPOS/lib/mysql-connector-java-5.1.46.jar!/" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -71,7 +79,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1579428010493</updated>
-      <workItem from="1579428014278" duration="1976000" />
+      <workItem from="1579428014278" duration="2974000" />
     </task>
     <servers />
   </component>
