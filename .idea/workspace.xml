@@ -7,12 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f621e821-007d-4bfd-a490-001a9932c89f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/io/github/idilantha/web/service/ItemServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/POS_JavaEE_war_exploded/WEB-INF/classes/io/github/idilantha/web/service/CustomerServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/POS_JavaEE_war_exploded/WEB-INF/classes/io/github/idilantha/web/service/CustomerServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/POS-JavaEE/io/github/idilantha/web/service/CustomerServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/POS-JavaEE/io/github/idilantha/web/service/CustomerServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/io/github/idilantha/web/service/CustomerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/io/github/idilantha/web/service/CustomerServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/dist/js/manage-customers-controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/dist/js/manage-customers-controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/manage-customers.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/manage-customers.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -49,6 +45,9 @@
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="io.github.idilantha.web.service" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/web" />
     </key>
@@ -152,7 +151,7 @@
       <workItem from="1579428014278" duration="6068000" />
       <workItem from="1579493168815" duration="3979000" />
       <workItem from="1579502437219" duration="6893000" />
-      <workItem from="1579532989023" duration="15778000" />
+      <workItem from="1579532989023" duration="16633000" />
     </task>
     <servers />
   </component>
