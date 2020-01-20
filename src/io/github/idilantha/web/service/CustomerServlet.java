@@ -65,7 +65,19 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPut(req, resp);
+        Connection con = DBConnection.getDbConnection().getConnection();
+        try {
+            JsonObject jsonObject = Json.createReader(req.getReader()).readObject();
+
+            PreparedStatement ps = con.prepareStatement("UPDATE Customer SET address=?, name=? WHERE customerId = ?");
+            ps.setObject(3,jsonObject.getString("id"));
+            ps.setObject(1,jsonObject.getString("address"));
+            ps.setObject(2,jsonObject.getString("name"));
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

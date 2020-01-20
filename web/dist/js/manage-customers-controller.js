@@ -45,24 +45,40 @@ $("#btnSubmit").click(function () {
             address: address
         };
 
-        http.onreadystatechange = function () {
-            if (http.readyState == 4 && http.status == 200) {
-                var tableData = '<tr>' +
-                    '<td>' + id + '</td>' +
-                    '<td>' + name + '</td>' +
-                    '<td>' + address + '</td>' +
-                    '<td><i class="fa fa-trash red"></i></td>' +
-                    '</tr>';
-                $("#tbl-customers tbody").append(tableData);
-                showOrHideFooter();
-                reset();
-                alert("Customer Saved Successfully !!");
-            }
-        };
+        if ($("#btnSubmit").text() == "Save"){
+            http.onreadystatechange = function () {
+                if (http.readyState == 4 && http.status == 200) {
+                    var tableData = '<tr>' +
+                        '<td>' + id + '</td>' +
+                        '<td>' + name + '</td>' +
+                        '<td>' + address + '</td>' +
+                        '<td><i class="fa fa-trash red"></i></td>' +
+                        '</tr>';
+                    $("#tbl-customers tbody").append(tableData);
+                    showOrHideFooter();
+                    reset();
+                    alert("Customer Saved Successfully !!");
+                }
+            };
 
-        http.open('POST', 'http://localhost:8080/pos/api/v1/customers', true);
+            http.open('POST', 'http://localhost:8080/pos/api/v1/customers', true);
 
-        http.send(JSON.stringify(customer));
+            http.send(JSON.stringify(customer));
+        } else {
+            http.onreadystatechange = function () {
+                if (http.readyState == 4 && http.status == 200) {
+                    loadCustomers();
+                    showOrHideFooter();
+                    reset();
+                    alert("Customer Updated Successfully !!");
+                }
+            };
+
+            http.open('PUT', 'http://localhost:8080/pos/api/v1/customers', true);
+
+            http.send(JSON.stringify(customer));
+        }
+
     } else {
         if (!address.match("^[a-zA-Z]+$")) {
             $("#txtCustomerAddress").addClass("invalid").select();
@@ -80,8 +96,13 @@ function reset() {
     $("#txtId").val("");
     $("#txtName").val("");
     $("#txtCustomerAddress").val("");
+    $("#btnSubmit").text("Save");
     $("#txtId").focus();
 }
+
+$("#btnReset").click(function () {
+    $("#btnSubmit").text("Save");
+});
 
 function deleteCustomer() {
     $("#tbl-customers").on('click', 'tbody tr td i', (function () {
@@ -94,9 +115,9 @@ function deleteCustomer() {
 
             http.onreadystatechange = function () {
                 if (http.readyState == 4 && http.status == 200){
-                    $("#tbl-customers tbody tr").remove();
                     loadCustomers();
                     alert("Customer Deleted !!")
+                    reset();
                 }
             };
 
@@ -126,3 +147,15 @@ function showOrHideFooter() {
         $("#tbl-customers tfoot").show();
     }
 }
+
+
+$("#tbl-customers").on('click','tbody tr',function () {
+    var id = $(this).children('td:first-child').text();
+    var name = $(this).children('td:nth-child(2)').text();
+    var address = $(this).children('td:nth-child(3)').text();
+
+    $("#txtId").val(id);
+    $("#txtName").val(name);
+    $("#txtCustomerAddress").val(address);
+    $("#btnSubmit").text("Update");
+});
