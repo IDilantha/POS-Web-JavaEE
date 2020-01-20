@@ -8,24 +8,24 @@ function loadCustomers() {
     var http = new XMLHttpRequest();
 
     http.onreadystatechange = function () {
-      if (http.readyState == 4 && http.status == 200 ){
-          var customers = JSON.parse(http.responseText);
-          for (var i=0; i<customers.length; i++){
-              var html = '<tr>' +
-                  '<td>'+ customers[i].id+'</td>' +
-                  '<td>'+ customers[i].name+'</td>' +
-                  '<td>'+ customers[i].address+'</td>' +
-                  '<td><i class="fa fa-trash red"></i></td>' +
-                  '</tr>';
-              $("#tbl-customers tbody").append(html);
-          }
-      }
+        if (http.readyState == 4 && http.status == 200) {
+            var customers = JSON.parse(http.responseText);
+            for (var i = 0; i < customers.length; i++) {
+                var html = '<tr>' +
+                    '<td>' + customers[i].id + '</td>' +
+                    '<td>' + customers[i].name + '</td>' +
+                    '<td>' + customers[i].address + '</td>' +
+                    '<td><i class="fa fa-trash red"></i></td>' +
+                    '</tr>';
+                $("#tbl-customers tbody").append(html);
+            }
+        }
         showOrHideFooter();
     };
 
-    http.open('GET','http://localhost:8080/pos/api/v1/customers',true);
+    http.open('GET', 'http://localhost:8080/pos/api/v1/customers', true);
 
-    http.setRequestHeader("Content-Type","application/json");
+    http.setRequestHeader("Content-Type", "application/json");
 
     http.send();
 }
@@ -35,22 +35,22 @@ $("#btnSubmit").click(function () {
     var name = $("#txtName").val();
     var address = $("#txtCustomerAddress").val();
 
-    if (id.match("^C[0-9]+$") && name.match("^[a-zA-Z]+$") && address.match("^[a-zA-Z]+$")){
+    if (id.match("^C[0-9]+$") && name.match("^[a-zA-Z]+$") && address.match("^[a-zA-Z]+$")) {
 
         var http = new XMLHttpRequest();
 
         var customer = {
-            id : id,
-            name : name,
-            address : address
+            id: id,
+            name: name,
+            address: address
         };
 
         http.onreadystatechange = function () {
-            if (http.readyState == 4 && http.status == 200 ){
-                var  tableData = '<tr>' +
-                    '<td>'+ id+'</td>' +
-                    '<td>'+ name+'</td>' +
-                    '<td>'+ address+'</td>' +
+            if (http.readyState == 4 && http.status == 200) {
+                var tableData = '<tr>' +
+                    '<td>' + id + '</td>' +
+                    '<td>' + name + '</td>' +
+                    '<td>' + address + '</td>' +
                     '<td><i class="fa fa-trash red"></i></td>' +
                     '</tr>';
                 $("#tbl-customers tbody").append(tableData);
@@ -60,14 +60,14 @@ $("#btnSubmit").click(function () {
             }
         };
 
-        http.open('POST','http://localhost:8080/pos/api/v1/customers',true);
+        http.open('POST', 'http://localhost:8080/pos/api/v1/customers', true);
 
         http.send(JSON.stringify(customer));
-    }else {
-        if (!address.match("^[a-zA-Z]+$")){
+    } else {
+        if (!address.match("^[a-zA-Z]+$")) {
             $("#txtCustomerAddress").addClass("invalid").select();
         }
-        if (!name.match("^[a-zA-Z]+$")){
+        if (!name.match("^[a-zA-Z]+$")) {
             $("#txtName").addClass("invalid").select();
         }
         if (!id.match("^C[0-9]+$")) {
@@ -84,13 +84,26 @@ function reset() {
 }
 
 function deleteCustomer() {
-    $("#tbl-customers").on('click','tbody tr td i',(function(){
-        if(confirm("Are you sure to delete this Customer?")){
-            $(this).parents("tr").fadeOut(1000, function(){
-                $(this).remove();
-                showOrHideFooter();
-            });
-         }
+    $("#tbl-customers").on('click', 'tbody tr td i', (function () {
+        var id = $(this).parents('tr').children('td:first-child').text();
+
+        if (confirm("Are you sure to delete this Customer?")) {
+            var http = new XMLHttpRequest();
+
+            var cusId = {id: id};
+
+            http.onreadystatechange = function () {
+                if (http.readyState == 4 && http.status == 200){
+                    $("#tbl-customers tbody tr").remove();
+                    loadCustomers();
+                    alert("Customer Deleted !!")
+                }
+            };
+
+            http.open('DELETE', 'http://localhost:8080/pos/api/v1/customers', true);
+
+            http.send(JSON.stringify(cusId));
+        }
     }));
 }
 
@@ -106,10 +119,10 @@ $("#txtCustomerAddress").keyup(function () {
 });
 
 
-function showOrHideFooter(){
-    if ($("#tbl-customers tbody tr").length > 0){
+function showOrHideFooter() {
+    if ($("#tbl-customers tbody tr").length > 0) {
         $("#tbl-customers tfoot").hide();
-    }else{
+    } else {
         $("#tbl-customers tfoot").show();
     }
-};
+}

@@ -70,6 +70,17 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doDelete(req, resp);
+        Connection con = DBConnection.getDbConnection().getConnection();
+        try {
+            JsonObject jsonObject = Json.createReader(req.getReader()).readObject();
+
+            PreparedStatement ps = con.prepareStatement("DELETE FROM Customer WHERE customerId=?");
+            ps.setObject(1,jsonObject.getString("id"));
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }
