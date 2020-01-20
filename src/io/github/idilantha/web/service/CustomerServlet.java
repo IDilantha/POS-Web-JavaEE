@@ -2,10 +2,7 @@ package io.github.idilantha.web.service;
 
 import io.github.idilantha.web.db.DBConnection;
 
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonObjectBuilder;
+import javax.json.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,8 +27,8 @@ public class CustomerServlet extends HttpServlet {
             JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
             while (rst.next()){
                 String id = rst.getString(1);
-                String name = rst.getString(2);
-                String address = rst.getString(3);
+                String name = rst.getString(3);
+                String address = rst.getString(2);
                 JsonObjectBuilder ob = Json.createObjectBuilder();
                 ob.add("id",id);
                 ob.add("name",name);
@@ -53,8 +50,14 @@ public class CustomerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Connection con = DBConnection.getDbConnection().getConnection();
         try {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO Customer VALUES(?,?,?)");
+            JsonObject jsonObject = Json.createReader(req.getReader()).readObject();
 
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Customer VALUES(?,?,?)");
+            ps.setObject(1,jsonObject.getString("id"));
+            ps.setObject(2,jsonObject.getString("address"));
+            ps.setObject(3,jsonObject.getString("name"));
+
+            ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

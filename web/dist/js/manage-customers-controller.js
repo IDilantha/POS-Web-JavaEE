@@ -35,17 +35,34 @@ $("#btnSubmit").click(function () {
     var name = $("#txtName").val();
     var address = $("#txtCustomerAddress").val();
 
-    var  tableData = '<tr>' +
-    '<td>'+ id+'</td>' +
-    '<td>'+ name+'</td>' +
-    '<td>'+ address+'</td>' +
-    '<td><i class="fa fa-trash red"></i></td>' +
-    '</tr>';
-
     if (id.match("^C[0-9]+$") && name.match("^[a-zA-Z]+$") && address.match("^[a-zA-Z]+$")){
-        $("#tbl-customers tbody").append(tableData);
-        showOrHideFooter();
-        reset();
+
+        var http = new XMLHttpRequest();
+
+        var customer = {
+            id : id,
+            name : name,
+            address : address
+        };
+
+        http.onreadystatechange = function () {
+            if (http.readyState == 4 && http.status == 200 ){
+                var  tableData = '<tr>' +
+                    '<td>'+ id+'</td>' +
+                    '<td>'+ name+'</td>' +
+                    '<td>'+ address+'</td>' +
+                    '<td><i class="fa fa-trash red"></i></td>' +
+                    '</tr>';
+                $("#tbl-customers tbody").append(tableData);
+                showOrHideFooter();
+                reset();
+                alert("Customer Saved Successfully !!");
+            }
+        };
+
+        http.open('POST','http://localhost:8080/pos/api/v1/customers',true);
+
+        http.send(JSON.stringify(customer));
     }else {
         if (!address.match("^[a-zA-Z]+$")){
             $("#txtCustomerAddress").addClass("invalid").select();
