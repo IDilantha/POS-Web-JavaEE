@@ -5,16 +5,29 @@ $(function () {
 
 function loadCustomers() {
     $("#tbl-customers tbody tr").remove();
-    for (var i=0; i<customers.length; i++){
-        var html = '<tr>' +
-            '<td>'+ customers[i].id+'</td>' +
-            '<td>'+ customers[i].name+'</td>' +
-            '<td>'+ customers[i].address+'</td>' +
-            '<td><i class="fa fa-trash red"></i></td>' +
-            '</tr>';
-        $("#tbl-customers tbody").append(html);
-    }
-    showOrHideFooter();
+    var http = new XMLHttpRequest();
+
+    http.onreadystatechange = function () {
+      if (http.readyState == 4 && http.status == 200 ){
+          var customers = JSON.parse(http.responseText);
+          for (var i=0; i<customers.length; i++){
+              var html = '<tr>' +
+                  '<td>'+ customers[i].id+'</td>' +
+                  '<td>'+ customers[i].name+'</td>' +
+                  '<td>'+ customers[i].address+'</td>' +
+                  '<td><i class="fa fa-trash red"></i></td>' +
+                  '</tr>';
+              $("#tbl-customers tbody").append(html);
+          }
+      }
+        showOrHideFooter();
+    };
+
+    http.open('GET','http://localhost:8080/pos/api/v1/customers',true);
+
+    http.setRequestHeader("Content-Type","application/json");
+
+    http.send();
 }
 
 $("#btnSubmit").click(function () {
