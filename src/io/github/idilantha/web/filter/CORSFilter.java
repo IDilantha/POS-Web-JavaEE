@@ -16,4 +16,5 @@ public class CORSFilter extends HttpFilter {
         response.setHeader("Access-Control-Expose-Headers","X-Count");
         super.doFilter(request, response, chain);
     }
+
 }

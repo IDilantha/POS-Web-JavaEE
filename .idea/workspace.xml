@@ -7,8 +7,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f621e821-007d-4bfd-a490-001a9932c89f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/POS_JavaEE_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/POS_JavaEE_war_exploded.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_5_1_46.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POS-JavaEE.iml" beforeDir="false" afterPath="$PROJECT_DIR$/POS-JavaEE.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/POS_JavaEE_war_exploded/WEB-INF/classes/io/github/idilantha/web/db/DBConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/POS_JavaEE_war_exploded/WEB-INF/classes/io/github/idilantha/web/db/DBConnection.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/POS_JavaEE_war_exploded/WEB-INF/classes/io/github/idilantha/web/service/CustomerServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/POS_JavaEE_war_exploded/WEB-INF/classes/io/github/idilantha/web/service/CustomerServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/POS-JavaEE/io/github/idilantha/web/db/DBConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/POS-JavaEE/io/github/idilantha/web/db/DBConnection.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/POS-JavaEE/io/github/idilantha/web/service/CustomerServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/POS-JavaEE/io/github/idilantha/web/service/CustomerServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/io/github/idilantha/web/db/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/io/github/idilantha/web/db/DBConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/io/github/idilantha/web/filter/CORSFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/io/github/idilantha/web/filter/CORSFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/io/github/idilantha/web/service/CustomerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/io/github/idilantha/web/service/CustomerServlet.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,8 +48,8 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../LayeredPOS/lib/mysql-connector-java-5.1.46.jar!/" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/mysql-connector-java-5.1.46.jar!/" />
+    <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
@@ -58,6 +67,7 @@
   </component>
   <component name="RunManager">
     <configuration name="Tomcat 9.0.29" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.29" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="UPDATING_POLICY" value="redeploy-artifacts" />
       <deployment>
         <artifact name="POS-JavaEE:war exploded">
           <settings>
@@ -140,7 +150,8 @@
       <option name="presentableId" value="Default" />
       <updated>1579428010493</updated>
       <workItem from="1579428014278" duration="6068000" />
-      <workItem from="1579493168815" duration="1950000" />
+      <workItem from="1579493168815" duration="3979000" />
+      <workItem from="1579502437219" duration="6893000" />
     </task>
     <servers />
   </component>
