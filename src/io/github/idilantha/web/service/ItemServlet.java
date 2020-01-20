@@ -17,7 +17,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-@WebServlet(urlPatterns = "/api/v1/customers")
+@WebServlet(urlPatterns = "/api/v1/items")
 public class ItemServlet extends HttpServlet {
 
     @Override
@@ -26,22 +26,24 @@ public class ItemServlet extends HttpServlet {
         try {
             int page = req.getParameter("page") == null ? 0 : Integer.parseInt(req.getParameter("page"));
             int size = req.getParameter("size") == null ? 5 : Integer.parseInt(req.getParameter("size"));
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM Customer LIMIT ? OFFSET ?");
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM Item LIMIT ? OFFSET ?");
             ps.setObject(1,size);
             ps.setObject(2,page * size);
             ResultSet rst = ps.executeQuery();
             JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
             while (rst.next()){
-                String id = rst.getString(1);
-                String name = rst.getString(3);
-                String address = rst.getString(2);
+                String code = rst.getString(1);
+                String description = rst.getString(2);
+                String qtyOnHand = rst.getString(3);
+                String unitPrice = rst.getString(4);
                 JsonObjectBuilder ob = Json.createObjectBuilder();
-                ob.add("id",id);
-                ob.add("name",name);
-                ob.add("address",address);
+                ob.add("code",code);
+                ob.add("description",description);
+                ob.add("qtyOnHand",qtyOnHand);
+                ob.add("unitPrice",unitPrice);
                 arrayBuilder.add(ob.build());
             }
-            ResultSet resultSet = connection.createStatement().executeQuery("SELECT COUNT(*) FROM Customer");
+            ResultSet resultSet = connection.createStatement().executeQuery("SELECT COUNT(*) FROM Item");
             resultSet.next();
             resp.setIntHeader("X-Count",resultSet.getInt(1));
             resp.setContentType("application/json");
@@ -58,10 +60,11 @@ public class ItemServlet extends HttpServlet {
         try {
             JsonObject jsonObject = Json.createReader(req.getReader()).readObject();
 
-            PreparedStatement ps = con.prepareStatement("INSERT INTO Customer VALUES(?,?,?)");
-            ps.setObject(1,jsonObject.getString("id"));
-            ps.setObject(2,jsonObject.getString("address"));
-            ps.setObject(3,jsonObject.getString("name"));
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Items VALUES(?,?,?,?)");
+            ps.setObject(1,jsonObject.getString("code"));
+            ps.setObject(2,jsonObject.getString("description"));
+            ps.setObject(3,jsonObject.getString("qtyOnHand"));
+            ps.setObject(4,jsonObject.getString("unitPrice"));
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -75,10 +78,11 @@ public class ItemServlet extends HttpServlet {
         try {
             JsonObject jsonObject = Json.createReader(req.getReader()).readObject();
 
-            PreparedStatement ps = con.prepareStatement("UPDATE Customer SET address=?, name=? WHERE customerId = ?");
-            ps.setObject(3,jsonObject.getString("id"));
-            ps.setObject(1,jsonObject.getString("address"));
-            ps.setObject(2,jsonObject.getString("name"));
+            PreparedStatement ps = con.prepareStatement("UPDATE Item SET description=?, qtyOnHand=?, unitPrice=? WHERE code = ?");
+            ps.setObject(4,jsonObject.getString("code"));
+            ps.setObject(1,jsonObject.getString("description"));
+            ps.setObject(2,jsonObject.getString("qtyOnHand"));
+            ps.setObject(3,jsonObject.getString("unitPrice"));
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -92,8 +96,8 @@ public class ItemServlet extends HttpServlet {
         try {
             JsonObject jsonObject = Json.createReader(req.getReader()).readObject();
 
-            PreparedStatement ps = con.prepareStatement("DELETE FROM Customer WHERE customerId=?");
-            ps.setObject(1,jsonObject.getString("id"));
+            PreparedStatement ps = con.prepareStatement("DELETE FROM Item WHERE code=?");
+            ps.setObject(1,jsonObject.getString("code"));
 
             ps.executeUpdate();
         } catch (SQLException e) {
