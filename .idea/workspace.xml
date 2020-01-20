@@ -7,8 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f621e821-007d-4bfd-a490-001a9932c89f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/io/github/idilantha/web/service/ItemServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/io/github/idilantha/web/service/ItemServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/io/github/idilantha/web/service/ItemServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/dist/js/manage-items-controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/dist/js/manage-items-controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/manage-items.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/manage-items.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -151,7 +153,7 @@
       <workItem from="1579428014278" duration="6068000" />
       <workItem from="1579493168815" duration="3979000" />
       <workItem from="1579502437219" duration="6893000" />
-      <workItem from="1579532989023" duration="16633000" />
+      <workItem from="1579532989023" duration="21187000" />
     </task>
     <servers />
   </component>

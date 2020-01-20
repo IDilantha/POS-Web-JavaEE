@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -60,7 +61,7 @@ public class ItemServlet extends HttpServlet {
         try {
             JsonObject jsonObject = Json.createReader(req.getReader()).readObject();
 
-            PreparedStatement ps = con.prepareStatement("INSERT INTO Items VALUES(?,?,?,?)");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Item VALUES(?,?,?,?)");
             ps.setObject(1,jsonObject.getString("code"));
             ps.setObject(2,jsonObject.getString("description"));
             ps.setObject(3,jsonObject.getString("qtyOnHand"));
