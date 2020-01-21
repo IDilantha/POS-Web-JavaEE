@@ -27,9 +27,9 @@ public class ItemServlet extends HttpServlet {
         try {
             int page = req.getParameter("page") == null ? 0 : Integer.parseInt(req.getParameter("page"));
             int size = req.getParameter("size") == null ? 5 : Integer.parseInt(req.getParameter("size"));
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM Item LIMIT ? OFFSET ?");
-            ps.setObject(1,size);
-            ps.setObject(2,page * size);
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM Item ");
+            /*ps.setObject(1,size);
+            ps.setObject(2,page * size);*/
             ResultSet rst = ps.executeQuery();
             JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
             while (rst.next()){
