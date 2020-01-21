@@ -17,35 +17,29 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-@WebServlet(urlPatterns = "/api/v1/customers")
+@WebServlet(urlPatterns = "/api/v1/custom")
 public class CustomServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Connection connection = DBConnection.getDbConnection().getConnection();
         try {
-            int page = req.getParameter("page") == null ? 0 : Integer.parseInt(req.getParameter("page"));
-            int size = req.getParameter("size") == null ? 5 : Integer.parseInt(req.getParameter("size"));
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM Customer LIMIT ? OFFSET ?");
-            ps.setObject(1,size);
-            ps.setObject(2,page * size);
-            ResultSet rst = ps.executeQuery();
-            JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
-            while (rst.next()){
-                String id = rst.getString(1);
-                String name = rst.getString(3);
-                String address = rst.getString(2);
-                JsonObjectBuilder ob = Json.createObjectBuilder();
-                ob.add("id",id);
-                ob.add("name",name);
-                ob.add("address",address);
-                arrayBuilder.add(ob.build());
-            }
+
             ResultSet resultSet = connection.createStatement().executeQuery("SELECT COUNT(*) FROM Customer");
+            ResultSet resultSet1 = connection.createStatement().executeQuery("SELECT COUNT(*) FROM Item");
+            ResultSet resultSet2 = connection.createStatement().executeQuery("SELECT COUNT(*) FROM `Order`");
+
             resultSet.next();
-            resp.setIntHeader("X-Count",resultSet.getInt(1));
+            resp.setIntHeader("C-Count",resultSet.getInt(1));
+
+            resultSet1.next();
+            resp.setIntHeader("I-Count",resultSet1.getInt(1));
+
+            resultSet2.next();
+            resp.setIntHeader("O-Count",resultSet2.getInt(1));
+
             resp.setContentType("application/json");
-            resp.getWriter().println(arrayBuilder.build().toString());
+            resp.getWriter().println();
         } catch (SQLException e) {
             e.printStackTrace();
 
@@ -54,49 +48,17 @@ public class CustomServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Connection con = DBConnection.getDbConnection().getConnection();
-        try {
-            JsonObject jsonObject = Json.createReader(req.getReader()).readObject();
 
-            PreparedStatement ps = con.prepareStatement("INSERT INTO Customer VALUES(?,?,?)");
-            ps.setObject(1,jsonObject.getString("id"));
-            ps.setObject(2,jsonObject.getString("address"));
-            ps.setObject(3,jsonObject.getString("name"));
-
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Connection con = DBConnection.getDbConnection().getConnection();
-        try {
-            JsonObject jsonObject = Json.createReader(req.getReader()).readObject();
 
-            PreparedStatement ps = con.prepareStatement("UPDATE Customer SET address=?, name=? WHERE customerId = ?");
-            ps.setObject(3,jsonObject.getString("id"));
-            ps.setObject(1,jsonObject.getString("address"));
-            ps.setObject(2,jsonObject.getString("name"));
-
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Connection con = DBConnection.getDbConnection().getConnection();
-        String customerId = req.getParameter("customerId");
-        try {
-            PreparedStatement ps = con.prepareStatement("DELETE FROM Customer WHERE customerId=?");
-            ps.setObject(1,customerId);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
     }
 
 }

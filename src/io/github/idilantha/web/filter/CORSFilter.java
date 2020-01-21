@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/api/v1/customers","/api/v1/items","/api/v1/orders"})
+@WebFilter(urlPatterns = {"/api/v1/customers","/api/v1/items","/api/v1/orders","/api/v1/custom"})
 public class CORSFilter extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -16,6 +16,9 @@ public class CORSFilter extends HttpFilter {
         response.setHeader("Access-Control-Allow-Methods","OPTIONS, GET, PUT, POST, DELETE");
         response.setHeader("Access-Control-Allow-Headers","Content-Type, X-Count");
         response.setHeader("Access-Control-Expose-Headers","X-Count");
+        response.setHeader("Access-Control-Expose-Headers","C-Count");
+        response.setHeader("Access-Control-Expose-Headers","I-Count");
+        response.setHeader("Access-Control-Expose-Headers","O-Count");
         super.doFilter(request, response, chain);
     }
 
