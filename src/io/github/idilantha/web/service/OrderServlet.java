@@ -2,10 +2,7 @@ package io.github.idilantha.web.service;
 
 import io.github.idilantha.web.db.DBConnection;
 
-import javax.json.Json;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonObject;
-import javax.json.JsonObjectBuilder;
+import javax.json.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 @WebServlet(urlPatterns = "/api/v1/orders")
 public class OrderServlet extends HttpServlet {
@@ -58,14 +56,38 @@ public class OrderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Connection con = DBConnection.getDbConnection().getConnection();
         try {
-            JsonObject jsonObject = Json.createReader(req.getReader()).readObject();
+            PreparedStatement ps1 = con.prepareStatement("SELECT id FROM `Order` Order By id DESC LIMIT 1");
+            ResultSet oid = ps1.executeQuery();
 
-            PreparedStatement ps = con.prepareStatement("INSERT INTO `Order` VALUES(?,?,?)");
-            ps.setObject(1,jsonObject.getString("id"));
-            ps.setObject(2,jsonObject.getString("date"));
-            ps.setObject(3,jsonObject.getString("customerId"));
+            if (oid.next()){
+                System.out.println("Order Id : "+oid.getString(1));
 
-            ps.executeUpdate();
+                String cusId = req.getParameter("cusId");
+                int orderID = Integer.valueOf(oid.getString(1))+1;
+                PreparedStatement ps = con.prepareStatement("INSERT INTO `Order` VALUES(?,?,?)");
+                ps.setObject(1,orderID);
+                ps.setObject(2,new java.sql.Date(new Date().getTime()));
+                ps.setObject(3,cusId);
+
+                int i = ps.executeUpdate();
+                System.out.println("Order Placed : "+i);
+
+                JsonArray jsonValues = Json.createReader(req.getReader()).readArray();
+                System.out.println("Order Details size : "+jsonValues.size());
+                if (i>0){
+                    for (int j=0;j< jsonValues.size();j++){
+                        JsonObject jsonObject = jsonValues.getJsonObject(j);
+
+                        PreparedStatement ps2 = con.prepareStatement("INSERT INTO OrderDetail VALUES(?,?,?,?)");
+                        ps2.setObject(1,jsonObject.getString("code"));
+                        ps2.setObject(2,orderID);
+                        ps2.setObject(3,jsonObject.getString("qtyOnHand"));
+                        ps2.setObject(4,jsonObject.getString("unitPrice"));
+                        ps2.executeUpdate();
+                    }
+                }
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

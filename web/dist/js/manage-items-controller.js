@@ -50,7 +50,7 @@ $("#btn-ItemAdd").click(function () {
             unitPrice: unitPrice
         };
 
-        if ($("#btn-ItemAdd").text() == "Save"){
+        if ($("#btn-ItemAdd").text() == "Save") {
             http.onreadystatechange = function () {
                 if (http.readyState == 4 && http.status == 200) {
                     var tableData = '<tr>' +
@@ -108,6 +108,7 @@ function reset() {
     $("#btn-ItemAdd").text("Save");
     $("#txtCode").focus();
 }
+
 $("#btnReset").click(function () {
     $("#btn-ItemAdd").text("Save");
 });
@@ -119,8 +120,6 @@ function deleteItem() {
         if (confirm("Are you sure to delete this Item?")) {
             var http = new XMLHttpRequest();
 
-            var itemCode = {code: code};
-
             http.onreadystatechange = function () {
                 if (http.readyState == 4 && http.status == 200) {
                     loadItems();
@@ -129,9 +128,9 @@ function deleteItem() {
                 }
             };
 
-            http.open('DELETE', 'http://localhost:8080/pos/api/v1/items', true);
+            http.open('DELETE', 'http://localhost:8080/pos/api/v1/items'+'?code=' + code, true);
 
-            http.send(JSON.stringify(itemCode));
+            http.send();
         }
     }));
 }
@@ -160,7 +159,7 @@ function showOrHideFooter() {
     }
 }
 
-$("#tbl-items").on('click','tbody tr',function () {
+$("#tbl-items").on('click', 'tbody tr', function () {
     var code = $(this).children('td:first-child').text();
     var description = $(this).children('td:nth-child(2)').text();
     var qtyOnHand = $(this).children('td:nth-child(3)').text();

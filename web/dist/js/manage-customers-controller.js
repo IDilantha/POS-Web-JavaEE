@@ -106,12 +106,12 @@ $("#btnReset").click(function () {
 
 function deleteCustomer() {
     $("#tbl-customers").on('click', 'tbody tr td i', (function () {
-        var id = $(this).parents('tr').children('td:first-child').text();
+        var customerId = $(this).parents('tr').children('td:first-child').text();
 
         if (confirm("Are you sure to delete this Customer?")) {
             var http = new XMLHttpRequest();
 
-            var cusId = {id: id};
+          //  var cusId = {id: id};
 
             http.onreadystatechange = function () {
                 if (http.readyState == 4 && http.status == 200){
@@ -121,9 +121,9 @@ function deleteCustomer() {
                 }
             };
 
-            http.open('DELETE', 'http://localhost:8080/pos/api/v1/customers', true);
+            http.open('DELETE', 'http://localhost:8080/pos/api/v1/customers' +'?customerId='+ customerId, true);
 
-            http.send(JSON.stringify(cusId));
+            http.send();
         }
     }));
 }

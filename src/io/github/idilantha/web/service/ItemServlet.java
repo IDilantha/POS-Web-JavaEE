@@ -94,12 +94,10 @@ public class ItemServlet extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Connection con = DBConnection.getDbConnection().getConnection();
+        String code = req.getParameter("code");
         try {
-            JsonObject jsonObject = Json.createReader(req.getReader()).readObject();
-
             PreparedStatement ps = con.prepareStatement("DELETE FROM Item WHERE code=?");
-            ps.setObject(1,jsonObject.getString("code"));
-
+            ps.setObject(1,code);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
