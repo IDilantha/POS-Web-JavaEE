@@ -8,21 +8,28 @@
   <component name="ChangeListManager">
     <list default="true" id="f621e821-007d-4bfd-a490-001a9932c89f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/POS_JavaEE_war_exploded/WEB-INF/classes/io/github/idilantha/web/service/CustomerServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/POS_JavaEE_war_exploded/WEB-INF/classes/io/github/idilantha/web/service/CustomerServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/POS-JavaEE/io/github/idilantha/web/service/CustomerServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/POS-JavaEE/io/github/idilantha/web/service/CustomerServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/io/github/idilantha/web/service/CustomerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/io/github/idilantha/web/service/CustomerServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/io/github/idilantha/web/service/ItemServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/io/github/idilantha/web/service/ItemServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/io/github/idilantha/web/service/OrderServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/io/github/idilantha/web/service/OrderServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/dist/js/manage-customers-controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/dist/js/manage-customers-controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/dist/js/manage-items-controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/dist/js/manage-items-controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/dist/js/place-order-controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/dist/js/place-order-controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/place-order.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/place-order.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/dist/js/manage-search_orders-controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/dist/js/manage-search_orders-controller.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -159,7 +166,7 @@
       <workItem from="1579428014278" duration="6068000" />
       <workItem from="1579493168815" duration="3979000" />
       <workItem from="1579502437219" duration="6893000" />
-      <workItem from="1579532989023" duration="38543000" />
+      <workItem from="1579532989023" duration="48564000" />
     </task>
     <servers />
   </component>

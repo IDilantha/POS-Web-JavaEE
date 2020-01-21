@@ -1,38 +1,38 @@
+var query = "";
+
 $(function () {
-   loadOrders();
+    loadOrders();
 });
 
 function loadOrders() {
-    $("#tbl-orders tbody tr").remove();
-    for (var i=0; i<orders.length;i++){
-        var html = '<tr>' +
-            '<td>'+ orders[i].orderId+'</td>' +
-            '<td>'+ orders[i].orderDate+'</td>' +
-            '<td>'+ orders[i].customerId+'</td>' +
-            '<td>'+ orders[i].customerName+'</td>' +
-            '<td>'+ orders[i].total+'</td>' +
-            '</tr>';
-        $("#tbl-orders tbody").append(html);
-    }
+    var http = new XMLHttpRequest();
+
+    http.onreadystatechange = function () {
+        if (http.readyState == 4 && http.status == 200) {
+            $("#tbl-orders tbody tr").remove();
+            var orders = JSON.parse(http.responseText);
+
+            for (var i = 0; i < orders.length; i++) {
+                var html = '<tr>' +
+                    '<td>' + orders[i].oid + '</td>' +
+                    '<td>' + orders[i].odate + '</td>' +
+                    '<td>' + orders[i].cid + '</td>' +
+                    '<td>' + orders[i].cname + '</td>' +
+                    '<td>' + orders[i].total + '</td>' +
+                    '</tr>';
+                $("#tbl-orders tbody").append(html);
+            }
+        }
+    };
+
+    http.open('GET', 'http://localhost:8080/pos/api/v1/orders' + '?query=' + query, true);
+
+    http.setRequestHeader("Content-Type", "application/json");
+
+    http.send();
 }
 
 $("#txtSearch").keyup(function () {
-    var txt = $("#txtSearch").val();
-    $("#tbl-orders tbody tr").remove();
-    search(txt);
+    query = $("#txtSearch").val();
+    loadOrders();
 });
-
-function search() {
-    for(var i=0; i < orders.length; i++){
-        if (arguments[0]== orders[i].orderId || arguments[0]==orders[i].orderDate || arguments[0]==orders[i].customerId || arguments[0]==orders[i].customerName || arguments[0]==orders[i].total ){
-             var search = '<tr>' +
-                 '<td>'+ orders[i].orderId+'</td>' +
-                 '<td>'+ orders[i].orderDate+'</td>' +
-                 '<td>'+ orders[i].customerId+'</td>' +
-                 '<td>'+ orders[i].customerName+'</td>' +
-                 '<td>'+ orders[i].total+'</td>' +
-                 '</tr>';
-             $("#tbl-orders tbody").append(search);
-        }
-    }
-}
